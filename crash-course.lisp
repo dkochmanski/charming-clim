@@ -45,10 +45,11 @@
 
 (defmacro with-colors ((window color-pair) &body body)
   (let ((winptr (gensym)))
-    `(let ((,winptr (charms::window-pointer ,window)))
-       (charms/ll:wattron ,winptr ,color-pair)
-       ,@body
-       (charms/ll:wattroff ,winptr ,color-pair))))
+    (alexandria:once-only (color-pair)
+      `(let ((,winptr (charms::window-pointer ,window)))
+         (charms/ll:wattron ,winptr ,color-pair)
+         ,@body
+         (charms/ll:wattroff ,winptr ,color-pair)))))
 
 
 ;;; first program (with border!)
@@ -72,7 +73,6 @@
 ;;; Second program (colors!)
 (defun pretty-hello-world ()
   (charms:with-curses ()
-    ;(charms:clear-window charms:*standard-window*)
     (charms:disable-echoing)
     (start-color)
     (loop named hello-world
