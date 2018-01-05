@@ -56,6 +56,7 @@
 (defun hello-world ()
   (charms:with-curses ()
     (charms:disable-echoing)
+    (charms:enable-raw-input)
     (loop named hello-world
        with window = (charms:make-window 50 15 10 10)
        do (progn
@@ -66,14 +67,14 @@
 
             ;; Process input
             (when (eql (charms:get-char window) #\q)
-              (return-from hello-world))
-            (sleep 0.1)))))
+              (return-from hello-world))))))
 
 
 ;;; Second program (colors!)
 (defun pretty-hello-world ()
   (charms:with-curses ()
     (charms:disable-echoing)
+    (charms:enable-raw-input)
     (start-color)
     (loop named hello-world
        with window = (charms:make-window 50 15 10 10)
@@ -88,6 +89,81 @@
 
             ;; Process input
             (when (eql (charms:get-char window :ignore-error t) #\q)
+              (return-from hello-world))))))
+
+
+;;; third program, amazing computation
+(defun amazing-hello-world ()
+  (charms:with-curses ()
+    (charms:disable-echoing)
+    (charms:enable-raw-input)
+    (start-color)
+    (loop named hello-world
+       with window = (let ((win (charms:make-window 50 15 10 10)))
+                       (charms:enable-non-blocking-mode win)
+                       win)
+       for flip-flop = (not flip-flop)
+       do (progn
+            (charms:clear-window window)
+            (draw-window-background window +white/blue+)
+            (with-colors (window (if flip-flop
+                                     +white/blue+
+                                     +black/red+))
+              (charms:write-string-at-point window "Hello world!" 0 0))
+            (charms:refresh-window window)
+            ;; Process input
+            (when (eql (charms:get-char window :ignore-error t) #\q)
               (return-from hello-world))
-            (sleep 0.1)))))
+            (sleep 1)))))
+
+;;; asynchronous input hack (should be a mailbox!)
+(defparameter *recompute-flag* nil "ugly and unsafe hack for communication")
+(defparameter *recompute-thread* nil)
+
+(defun start-recompute-thread ()
+  (when *recompute-thread*
+    (bt:destroy-thread *recompute-thread*))
+  (setf *recompute-thread*
+        (bt:make-thread
+         #'(lambda ()
+             (loop
+                (sleep 1)
+                (setf *recompute-flag* t))))))
+
+(defun stop-recompute-thread ()
+  (when *recompute-thread*
+    (bt:destroy-thread *recompute-thread*)
+    (setf *recompute-thread* nil)))
+
+(defun display-amazing-hello-world (window flip-flop)
+  (charms:clear-window window)
+  (draw-window-background window +white/blue+)
+  (with-colors (window (if flip-flop
+                           +white/blue+
+                           +black/red+))
+    (charms:write-string-at-point window "Hello world!" 0 0))
+  (charms:refresh-window window))
+
+(defun get-amazing-hello-world-input (window)
+  (when *recompute-flag*
+    (setf *recompute-flag* nil)
+    (return-from get-amazing-hello-world-input :compute))
+  (charms:get-char window :ignore-error t))
+
+(defun improved-amazing-hello-world ()
+  (charms:with-curses ()
+    (charms:disable-echoing)
+    (charms:enable-raw-input)
+    (start-color)
+    (let ((window (charms:make-window 50 15 10 10))
+          (flip-flop nil))
+      (charms:enable-non-blocking-mode window)
+      (display-amazing-hello-world window flip-flop)
+      (loop named hello-world
+         do (case (get-amazing-hello-world-input window)
+              ((#\q #\Q) (return-from hello-world))
+              (:compute (setf flip-flop (not flip-flop))
+                        (display-amazing-hello-world window flip-flop))
+              ;; don't be a pig to a processor
+              (otherwise (sleep 1/60)))))))
 
