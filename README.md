@@ -1,15 +1,15 @@
 
 # Writing a new CLIM backend
 
-This work is meant as a showcase how to write new McCLIM backend. To make it
+This work is meant as a showcase how to write a new McCLIM backend. To make it
 more interesting to me I'm writing it using `cl-charms` library which is a
 Common Lisp library for `ncurses` - console manipulation library for UNIX
 systems. During development I'm planning to make notes about necessary steps. If
 possible I'll also write a test suite for backends which will test the
-functionality from most basic parts (like creating windows to more sophisticated
-ones (transformations and drawing). That should simplify verifying, if new
-backends work fine and to what degree it is complete. We start with a crash
-course for `cl-charms` library.
+functionality from most basic parts (like creating windows) to more
+sophisticated ones (transformations and drawing). That should simplify
+verifying, if new backends work fine and to what degree it is complete. We start
+with a crash course for `cl-charms` library.
 
 ## Pointers
 
