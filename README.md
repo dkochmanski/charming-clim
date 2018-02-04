@@ -8,7 +8,8 @@ systems. During development I'm planning to make notes about necessary steps. If
 possible I'll also write a test suite for backends which will test the
 functionality from most basic parts (like creating windows to more sophisticated
 ones (transformations and drawing). That should simplify verifying, if new
-backends work fine and to what degree it is complete.
+backends work fine and to what degree it is complete. We start with a crash
+course for `cl-charms` library.
 
 # cl-charms crash course
 
