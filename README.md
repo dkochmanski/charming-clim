@@ -11,6 +11,14 @@ ones (transformations and drawing). That should simplify verifying, if new
 backends work fine and to what degree it is complete. We start with a crash
 course for `cl-charms` library.
 
+## Pointers
+
+* [charming clim](https://github.com/dkochmanski/charming-clim) is a main project repository
+* [cl-charms remote branch](https://github.com/dkochmanski/cl-charms) - some
+  functionality may depend on changes in this repository (pull requests to
+  upstream are pending)
+* [cl-charms upstream repository](https://github.com/HiTECNOLOGYs/cl-charms).
+
 # cl-charms crash course
 
 Ensure you have `ncurses` development package installed on your system. Start
