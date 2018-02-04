@@ -1,7 +1,7 @@
 
 # Writing new CLIM backend
 
-This work is meant as a showcase how to write new McCLIM backends. To make it
+This work is meant as a showcase how to write new McCLIM backend. To make it
 more interesting to me I'm writing it using `cl-charms` library which is a
 Common Lisp library for `ncurses` - console manipulation library for UNIX
 systems. During development I'm planning to make notes about necessary steps. If
@@ -10,7 +10,7 @@ functionality from most basic parts (like creating windows to more sophisticated
 ones (transformations and drawing). That should simplify verifying, if new
 backends work fine and to what degree it is complete.
 
-## cl-charms crash course
+# cl-charms crash course
 
 Ensure you have `ncurses` development package installed on your system. Start
 the real terminal (Emacs doesn't start `*inferior-lisp*` in something `ncurses`
@@ -52,7 +52,7 @@ goal is to have a window with four buttons and text input box. Navigation should
 be possible with `[TAB]` / `[SHIFT]+[TAB]` and by selecting gadgets with a mouse
 pointer. Behold, time for the first application.
 
-### First application
+## First application
 
 Lets dissect this simple program which prints "Hello world!" on the screen:
 
@@ -86,7 +86,7 @@ We create a Window for output (its size is 50x15 and offset is 10x10) and then
 in a loop we print "Hello world!" (at the top-left corner of it) until user
 press the character `q`.
 
-### Extending cl-charms API
+## Extending cl-charms API
 
 All functions used until now come from higher-level interface. `charms` has also
 a low-level interface which maps to `libncurses` via `CFFI`. This interface is
@@ -200,7 +200,7 @@ Result looks, as promised in the function name, very pretty ;-)
 
 ![](cc-background.png)
 
-### Asynchronous input
+## Asynchronous input
 
 Printing `Hello world!` doesn't satisfy our needs, we want to interact with a
 brilliant software we've just made while its running. Even more, we want to do
@@ -335,7 +335,7 @@ And finally improved application which takes asynchronous input without blocking
 When you are done with demo you may call `stop-recompute-thread` to spare your
 image unnecessary flipping a global variable.
 
-### Gadgets and input handling
+## Gadgets and input handling
 
 So we have created an amazing piece of software which does the computation and
 reacts (instantaneously!) to our input. Greed is an amazing phenomena – we want
@@ -605,7 +605,7 @@ various buttons and check out if text input works as desired. When you select
 `Toggle` and press `[enter]` computation label at the top will start / stop
 blinking in one second intervals.
 
-### Mouse integration
+## Mouse integration
 
 Our software has reached the phase where it is production ready. Investors crawl
 at our doorbell because they feel it is something what will boost their
@@ -806,11 +806,11 @@ character sequences). We also call `start-mouse`.
 
 Our final result is splendid! We got rich :-)
 
-[gif showing mouse]
+[![asciicast](cc-final.png)](https://asciinema.org/a/KNDnnycLc2uHMsmi7YvFMUpau)
 
 To finish our lisp session type in the slime REPL `(quit)`.
 
-### Conclusions
+## Conclusions
 
 In this crash course we have explored some parts of the `cl-charms` interface
 (windows, colors, mouse integration...) and defined an ad-hoc toolkit for the
