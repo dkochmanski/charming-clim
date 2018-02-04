@@ -1,5 +1,5 @@
 
-# Writing new CLIM backend
+# Writing a new CLIM backend
 
 This work is meant as a showcase how to write new McCLIM backend. To make it
 more interesting to me I'm writing it using `cl-charms` library which is a
