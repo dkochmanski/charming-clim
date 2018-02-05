@@ -8,8 +8,8 @@ systems. During development I'm planning to make notes about necessary steps. If
 possible I'll also write a test suite for backends which will test the
 functionality from most basic parts (like creating windows) to more
 sophisticated ones (transformations and drawing). That should simplify
-verifying, if new backends work fine and to what degree it is complete. We start
-with a crash course for `cl-charms` library.
+verifying, if new a backend works fine and to what degree it is complete. We
+start with a crash course for `cl-charms` library.
 
 ## Pointers
 
@@ -710,11 +710,11 @@ we have dfined at the beginning):
 
 This escape sequence sets xterm mode for reporting any mouse event including
 mouse movement (see
-()[http://invisible-island.net/xterm/ctlseqs/ctlseqs.html]). This escape
-sequence is usually honored by other terminal emulators (not only
+(http://invisible-island.net/xterm/ctlseqs/ctlseqs.html)[http://invisible-island.net/xterm/ctlseqs/ctlseqs.html]). This
+escape sequence is usually honored by other terminal emulators (not only
 xterm). Without it we wouldn't be able to track mouse movement (only pointer
-press, release, scroll etc). This is important to us because we want to activate gadgets
-when mouse moves over them.
+press, release, scroll etc). This is important to us because we want to activate
+gadgets when mouse moves over them.
 
 To start mouse and configure its events lets create initialization function. We
 configure terminal to report all mouse events including its position. After that
