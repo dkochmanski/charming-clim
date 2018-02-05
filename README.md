@@ -670,7 +670,6 @@ be handled by the previously defined `handle-input` method.
 
 ```common-lisp
 (defun distribute-mouse-event (bstate x y)
-  (setf *cursor* (cons x y))
   (dolist (g *gadgets*)
     (when (region-contains-position-p g x y)
       (setf *active-gadget* g)
