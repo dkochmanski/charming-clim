@@ -710,7 +710,7 @@ we have dfined at the beginning):
 
 This escape sequence sets xterm mode for reporting any mouse event including
 mouse movement (see
-(http://invisible-island.net/xterm/ctlseqs/ctlseqs.html)[http://invisible-island.net/xterm/ctlseqs/ctlseqs.html]). This
+[http://invisible-island.net/xterm/ctlseqs/ctlseqs.html](http://invisible-island.net/xterm/ctlseqs/ctlseqs.html)). This
 escape sequence is usually honored by other terminal emulators (not only
 xterm). Without it we wouldn't be able to track mouse movement (only pointer
 press, release, scroll etc). This is important to us because we want to activate
