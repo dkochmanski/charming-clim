@@ -71,7 +71,7 @@ Lets dissect this simple program which prints "Hello world!" on the screen:
     (charms:disable-echoing)
     (charms:enable-raw-input)
     (loop named hello-world
-       with window = (charms:make-window 50 50 10 10)
+       with window = (charms:make-window 50 15 10 10)
        do (progn
             (charms:clear-window window)
             (charms:write-string-at-point window "Hello world!" 0 0)
@@ -385,20 +385,17 @@ Lets define something what we will use in our application.
 (defparameter *computation-name* "Hello world!")
 
 (defclass text-input-gadget (gadget)
-  ((buffer :accessor gadget-buffer)
+  ((buffer :initarg :buffer :accessor gadget-buffer)
    (width :initarg :width :reader gadget-width)))
 
 (defun make-text-input-gadget (width x y)
-  (let ((gadget (make-instance 'text-input-gadget
-                               :width width
-                               :position (cons x y)))
-        (array (make-array width
-                           :element-type 'character
-                           :initial-element #\space
-                           :fill-pointer t)))
-    (setf (gadget-buffer gadget) array
-          (fill-pointer array) 0)
-    gadget))
+  (make-instance 'text-input-gadget
+                 :width width
+                 :position (cons x y)
+                 :buffer (make-array width
+                                     :element-type 'character
+                                     :initial-element #\space
+                                     :fill-pointer 0)))
 
 (defmethod display-gadget ((window charms:window) (gadget text-input-gadget) &key)
   (with-colors (window (if (eql gadget *active-gadget*)
