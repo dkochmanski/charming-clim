@@ -1,3 +1,4 @@
+
 (defpackage #:charming-clim/charms-crash-course
   (:use #:cl)
   (:export #:hello-world)
@@ -23,7 +24,7 @@
       (if (= ret-code 0)
           T
           (error "start-color error ~s." ret-code))))
-  
+
   (defconstant +black+   charms/ll:COLOR_BLACK)
   (defconstant +red+     charms/ll:COLOR_RED)
   (defconstant +green+   charms/ll:COLOR_GREEN)

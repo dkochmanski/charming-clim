@@ -3,7 +3,7 @@
 ;;;; Copyright (c) 2018 Daniel Kochmański
 
 (asdf:defsystem #:charming-clim
-  :description "Describe charming-clim here"
+  :description "Charming CLIM is cl-charms backend for McCLIM."
   :author "Daniel Kochmański"
   :license "BSD-2-Clause"
   :serial t
