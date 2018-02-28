@@ -19,6 +19,7 @@ start with a crash course for `cl-charms` library.
   upstream are pending)
 * [cl-charms upstream repository](https://github.com/HiTECNOLOGYs/cl-charms).
 
+
 # cl-charms crash course
 
 Ensure you have `ncurses` development package installed on your system. Start
@@ -439,8 +440,7 @@ accordingly. If it is `backspace` (or `rubout` as on my keyboard with this
 terminal settings), we remove one element. If it is `return` (or `newline`) we
 change the computation name and empty input. `escape` clears the box and
 finally, if it is a character which we can print, we add it to the text-input
-(`vector-push` won't extend vector length so rudimentary characters are
-ignored).
+(`vector-push` won't extend vector length so extra characters are ignored).
 
 ```common-lisp
 (defparameter *gadgets*

@@ -6,8 +6,14 @@
   :description "Charming CLIM is cl-charms backend for McCLIM."
   :author "Daniel Kochmański"
   :license "BSD-2-Clause"
+  :depends-on (#:mcclim #:cl-charms)
   :serial t
+  :pathname "src"
   :components ((:file "package")
                (:file "charming-clim")
-               (:file "crash-course")))
+               (:file "classes")
+               (:file "port")
+               (:file "frame-manager")
+               (:file "medium")
+               (:file "various")))
 
