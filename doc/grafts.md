@@ -267,7 +267,12 @@ remind you what kind of objects we are dealing with:
 
 * Medium is a representation of the sheet on a physical device. Sheet is the The
   form which is a region and may be drawn – it doesn't concern itself with
-  physical limitations. We will cover only medium's basics here.
+  physical limitations.
+
+In the next post I will show how to implement the port and the graft (and a bit
+of the medium) for the charming backend. I will cover only bare minimum for
+mediums important to verify that graft works as expected. Complete medium
+implementation is the material for a separate post.
 
 [^10]: Sometimes we deal with devices which we can't take input from – for
     instance a printer, a PDF render or a display without other peripherals.
