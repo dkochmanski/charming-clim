@@ -197,13 +197,9 @@ we wouldn't know where to start plotting.
     ![plotter](plotter-wrong-sbs.png)
 
 * Correct transformation involves reverting Y axis and translating objects by
-  the screen height. 
+  the screen height. See correct transformation (on 80DPI and on MDPI plotter).
 
     ![plotter](plotter.png)
-
-* And just for completness I'll include screen of higher quality plotter with
-  graphics orientation:
-
     ![HQ plotter](hq-plotter.png)
 
 [^7]: Ideal border is composed of lines which are 1-dimensional objects which
