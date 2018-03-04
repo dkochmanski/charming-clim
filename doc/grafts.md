@@ -199,8 +199,7 @@ we wouldn't know where to start plotting.
 * Correct transformation involves reverting Y axis and translating objects by
   the screen height. See correct transformation (on 80DPI and on MDPI plotter).
 
-    ![plotter](plotter.png)
-    ![HQ plotter](hq-plotter.png)
+    ![80DPI and MDPI plotters](plotters.png)
 
 [^7]: Ideal border is composed of lines which are 1-dimensional objects which
     doesn't occupy any space. Red border in drawings marks "ideal" object
