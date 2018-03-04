@@ -185,14 +185,11 @@ device. This is important, because we need to settle device coordinate `[0,0]`
 in our infinite drawing plane (for instance it could start at `[0,500]`). Otherwise
 we wouldn't know where to start plotting.
 
-* Graft simply reverts Y axis and sends the image to the plotter.
-
-    ![plotter wrong](plotter-wrong.png)
-
-    Do you see what is wrong with this picture? We have defined both rectangles in
-    default orientation, so our drawing should look similar disregarding the medium
-    we print on. While we preserved the size we didn't preserve image orientation
-    cyan rectangle should be higher on the plot.
+* Graft simply reverts Y axis and sends the image to the plotter. Do you see
+  what is wrong with this picture? We have defined both rectangles in default
+  orientation, so our drawing should look similar disregarding the medium we
+  print on. While we preserved the real size we don't preserve image orientation
+  - cyan rectangle should be higher on the plot.
 
     ![plotter](plotter-wrong-sbs.png)
 
