@@ -2,19 +2,19 @@
 # Sheets as ideal forms
 
 CLIM operates on various kinds of objects. Some are connected by an inheritance,
-other by a composition and some are similar in different sense.
+other by a composition and some are similar in a different sense.
 
-As programmers we often deal with the inheritance and the composition,
+As programmers, we often deal with the inheritance and the composition,
 especially since OOP is a dominating paradigm of programming (no matter if the
 central concept is the object or the function). Not so often we deal with the
-third type of connection, that is the Form and the phenomena which is mere a
+third type of connection, that is the Form and the phenomena which are merely a
 shadow mimicking it[^1].
 
-Let us talk about sheets. Sheet is a region[^2] with an infinite resolution and
-potentially infinite extent on which we can draw. Sheets may be arranged into
-hierarchies creating a windowing system with child-parent relation. Sheet is the
-Form with no visual appearance. What we observe is an approximation of the sheet
-which may be hard to recognize when compared to other approximations.
+Let us talk about sheets. The sheet is a region[^2] with an infinite resolution
+and potentially infinite extent on which we can draw. Sheets may be arranged
+into hierarchies creating a windowing system with a child-parent relation. Sheet
+is the Form with no visual appearance. What we observe is an approximation of
+the sheet which may be hard to recognize when compared to other approximations.
 
 [^1]: [Theory of forms](https://en.wikipedia.org/wiki/Theory_of_forms).
 
@@ -34,39 +34,39 @@ to take into consideration at least the following scenarios:
 1. If we assume device-specific unit results may drastically differ (density may
 vary from say 1200dpi on a printer down to 160dpi on a desktop[^4]!. The very
 same square could have 20cm on a paper sheet, 10cm and 7cm on different displays
-and 1cm on a terminal.  From the perspective of person who uses the application
-this may be confusing because physical objects doesn't change size without a
-reason.
+and 1cm on a terminal.  From the perspective of a person who uses the
+application, this may be confusing because physical objects don't change size
+without a reason.
 
 2. Another possible approach is to assume the physical world distances measured
 in millimeters (or inches if you must). Thanks to that object will have a
 similar size on different mediums. This is better but still not good. We have to
-acknowledge that most computer displays are pixel based. Specifying a distances
-in millimeters will inevitably lead to worse drawing quality[^5] (compared to
-the situation when we use pixels as the base unit). Moreover conversion from
-millimeter values to pixel will most inevitably lead to work on floats.
+acknowledge that most computer displays are pixel based. Specifying distances in
+millimeters will inevitably lead to worse drawing quality[^5] (compared to the
+situation when we use pixels as the base unit). Moreover, conversion from
+millimeter values to the pixel will most inevitably lead to work on floats.
 
-3. Some applications may have specific demands. For instance application is
+3. Some applications may have specific demands. For instance, application is
 meant to run on a bus stop showing arrival times. Space of the display is very
-limited and we can't afford approximation from high-density specification (in
-pixels or millimeters) to 80x40 screen (5 lines of 8 characters with 5x8 dots
-each). We need to be very precise and the ability to request a particular unit
-size for a sheet is essential. Of course we want to test such application on a
-computer screen.
+limited and we can't afford approximation from the high-density specification
+(in pixels or millimeters) to 80x40 screen (5 lines of 8 characters with 5x8
+dots each). We need to be very precise and the ability to request a particular
+unit size for a sheet is essential. Of course, we want to test such application
+on a computer screen.
 
-I will try to answer this question in a moment. First we have to talk about the
-`CLIM` specification and limitations imposed by McCLIM's implementaiton of
+I will try to answer this question in a moment. First, we have to talk about the
+`CLIM` specification and limitations imposed by McCLIM's implementation of
 grafts.
 
 [^3]: See some [general recommendations](http://bauhh.dyndns.org:8000/clim-spec/12-4.html).
 
-[^4]: Technically it should be [PPI not DPI](https://99designs.com/blog/tips/ppi-vs-dpi-whats-the-difference/) (pixels per inch).
+[^4]: Technically it should be [PPI, not DPI](https://99designs.com/blog/tips/ppi-vs-dpi-whats-the-difference/) (pixels per inch).
 
 [^5]: Given programmer specifies sheet size in integers (like 100x100).
 
-## Ports, grafts and McCLIM limitations
+## Ports, grafts, and McCLIM limitations
 
-If port is a physical connection to a display server then graft is its screen
+If a port is a physical connection to a display server then graft is its screen
 representation. The following picture illustrates how the same physical screen
 may be perceived depending on its settings and the way we look at it.
 
@@ -74,13 +74,13 @@ may be perceived depending on its settings and the way we look at it.
 
 As we can see graft has an orientation (`:default` starts at the top-left corner
 like a paper sheet and `:graphics` should start at the bottom left corner like
-on the chart).  Moreover it has units. Currently McCLIM will recognize
+on the chart).  Moreover, it has units. Currently, McCLIM will recognize
 `:device`, `:inches`, `:millimeters` and `:screen-sized`[^11].
 
 That said McCLIM doesn't implement graft in a useful way. Everything is measured
 in pixels (which `:device` units are assumed to be) and only the `:default`
 orientation is implemented. By now we should already know that pixels are a not
-a good choice for the default unit. Also programmer doesn't have means to
+a good choice for the default unit. Also, programmer doesn't have means to
 request unit for a sheet (this is the API problem).
 
 [^11]: Screen size unit means that the coordinate [1/2, 1/2] is exactly in the
@@ -88,11 +88,11 @@ request unit for a sheet (this is the API problem).
 
 ## Physical size and pixel size compromise
 
-We will skip the third situation for now to decide what unit should we default
-to. There are cognitive arguments for units based on a real world distances but
+We will skip the third situation, for now, to decide what unit should we default
+to. There are cognitive arguments for units based on a real-world distance but
 there are also and practical reasons against using millimeters – poor mapping to
 pixels and the fact that CLIM software which is already written is defined with
-assumption that we operate on something comparable to pixel.
+the assumption that we operate on something comparable to a pixel.
 
 Having all that in mind the default unit should
 be
@@ -110,8 +110,8 @@ applications and we preserving absolute distances across different screens.
 
 Application medium may be a pixel-based screen, paper sheet or even a text
 terminal. When the programmer writes the application he operates on dip units
-which have absolute value 0.15875mm. It is McCLIM responsibility to map these
-units onto the device. To be precise each graft needs to hold an extra
+which have absolute value 0.15875mm. It is the McCLIM responsibility to map
+these units onto the device. To be precise each graft needs to hold an extra
 transformation which is applied before sending content to the display server.
 
 Now we will go through a few example mappings of two rectangle borders[^7] drawn
@@ -125,8 +125,8 @@ rectangle coordinates are `[25,10], [30,15]`.
 
 * Some old displays have density 72PPI. Not all coordinates map exactly to
   pixels - we need to round them[^3]. Notice that border is thicker and that
-  proportions are a little distorted. On the other hand despite big change in
-  resolution size of the object is similar in real world values.
+  proportions are a little distorted. On the other hand despite a big change in
+  resolution size of the object is similar in real-world values.
 
   Windows Presentation Foundation declared 96PPI screen's pixel being the
   device-independent pixel because such displays were pretty common on
@@ -136,13 +136,13 @@ rectangle coordinates are `[25,10], [30,15]`.
     ![Lower DPI](72dpi-96dpi-sbs.png)
 
 * Fact that the screen has higher density doesn't mean that coordinates mapping
-  perfectly on a lower density screen will map well on a higher density
+  perfectly on a lower density screen will map well to a higher density
   one. Take this HDPI screen. Almost all coordinates are floats while on the
   MDPI display they had all integer values.
 
     ![HDPI](hdpi.png)
 
-* Higher resolution makes rectangles look better (border line is thinner and
+* Higher resolution makes rectangles look better (borderline is thinner and
   distortions are less visible to the eye). Here is XXXHDPI:
 
     ![XXXHDPI](xxxhdpi.png)
@@ -162,15 +162,15 @@ rectangle coordinates are `[25,10], [30,15]`.
 
     ![Character terminal](console.png)
 
-It is time to deal with `graphics` orientation (Y-axis grows towards top). An
-imaginary plotter with 80DPI resolution will be used to illustrate two solutions
-(the first one is wrong!). Knowing the plotter screen height is important to
-know where we start the drawing.
+It is time to deal with `graphics` orientation (Y-axis grows towards the
+top). An imaginary plotter with 80DPI resolution will be used to illustrate two
+solutions (the first one is wrong!). Knowing the plotter screen height is
+important to know where we start the drawing.
 
 * Graft reverts Y axis and sends the image to the plotter. Do you see what is
   wrong with this picture? We have defined both rectangles in default
   orientation, so our drawing should look similar disregarding the medium we
-  print on. We do preserved the real size but we don't preserve the image
+  print on. We do preserve the real size but we don't preserve the image
   orientation – cyan rectangle should be higher on the plot.
 
     ![Plotter (bad transformation)](plotter-wrong-sbs.png)
@@ -181,11 +181,11 @@ know where we start the drawing.
 
     ![80DPI and MDPI plotters](plotters.png)
 
-[^7]: Ideal border is composed of lines which are 1-dimensional objects which
-    doesn't occupy any space. Red border in drawings marks "ideal" object
+[^7]: the Ideal border is composed of lines which are 1-dimensional objects
+    which doesn't occupy any space. Red border in drawings marks "ideal" object
     boundaries. Points are labeled in device units (with possible fractions).
 
-## Sheets written with a special devices in mind
+## Sheets written with a special device in mind
 
 There is still an unanswered question - how can we program applications with a
 specific device limitations in mind? As we have discussed earlier default sheet
@@ -193,7 +193,7 @@ unit should be dip and default sheet orientation is the same as a paper
 sheet's[^8].
 
 Writing an application for a terminal is different than writing an application
-for a web browser. Number of characters which fit on the screen is limited,
+for a web browser. The number of characters which fit on the screen is limited,
 drawing shapes is not practical etc. To ensure that the application is rendered
 correctly we need a special kind of sheet which will operate on units being
 characters. Take a look at the following example.
@@ -202,16 +202,16 @@ characters. Take a look at the following example.
 
 The first sheet base unit is a character of a certain physical size. We print
 some information on it in various colors. Nothing prevents us from drawing a
-circle[^9] but that would miss the point. We use character as a unit because we
-don't want rounding and approximation. Background and foreground colors are
+circle[^9] but that would miss the point. We use a character as a unit because
+we don't want rounding and approximation. Background and foreground colors are
 inherited.
 
 The second sheet base unit is dip. It has two circles, solid grey background and
 a few strings (one is written in italic).
 
-Ideally we want to be able to render both sheets on the same physical
-screen. The graft and the medium will take care of the sheet
-approximation. Effect should look something like this.
+Ideally, we want to be able to render both sheets on the same physical
+screen. The graft and the medium will take care of the sheet approximation. The
+effect should look something like this.
 
 ![Different kinds of screens.](screens-different-kinds.png)
 
@@ -230,20 +230,20 @@ it looks exactly the same as on the terminal.
 [^9]: As we have noted sheets are ideal planar spaces where line thickness is 0
     and there is nothing preventing us from using fractions as coordinates.
 
-<!-- Writing applications for terminal require a special kind of focus: the space is -->
-<!-- very limited and off-by-one errors yield a huge difference in visual apperance in -->
-<!-- the applicaiton. Rounding from dip is a big no for some use cases. On the other -->
-<!-- hand we don't want to provide a separate implementation of each pane and gadget -->
-<!-- (which are a special kinds of sheets) in case our application declares non-default -->
-<!-- units. This two concerns yield the following conclusion: in the application frame -->
+<!-- Writing applications for terminal require a special kind of focus: space is -->
+<!-- very limited and off-by-one errors yield a huge difference in visual appearance in -->
+<!-- the application. Rounding from dip is a big no for some use cases. On the other -->
+<!-- the hand we don't want to provide a separate implementation of each pane and gadget -->
+<!-- (which are special kinds of sheets) in case our application declares non-default -->
+<!-- units. These two concerns yield the following conclusion: in the application frame -->
 <!-- different sheets may have different units and orientation (and effectively different -->
 <!-- grafts engrafted to their mediums). -->
 
 <!-- It is important to remember, that this behavior -->
 <!-- must be transparent from the perspective of other sheets – we need to find a clever -->
-<!-- way to convert sheet-specific unit to the default unit dip. If sheet is grafted -->
+<!-- way to convert the sheet-specific unit to the default unit dip. If a sheet is grafted -->
 <!-- then this should be easy enough, but what about ungrafted sheet? What is the size -->
-<!-- of a character? Also spec clearly says, that sheet hierarchy may be grafted only -->
+<!-- of a character? Also, spec clearly says, that sheet hierarchy may be grafted only -->
 <!-- to one graft. Hmm, so maybe we can't really reuse the components..  -->
 
 <!-- sheet-region is in sheet coordinate system! -->
@@ -255,18 +255,18 @@ it looks exactly the same as on the terminal.
 Now we know *what* we want. Time to think about *how* to achieve it. Let me
 remind you what kind of objects we are dealing with:
 
-* Port is a logical connection to a display server. For instance it may contain
+* Port is a logical connection to a display server. For instance, it may contain
   a foreign handler which is passed to the external system API. It is
   responsible for the communication – configuring, writing to[^10] and reading
-  from a device we are connected to.
+  from a device, we are connected to.
 
 * Graft is a logical screen representation on which we draw. It is responsible
-  for all transformations necessary to achieve desired effect on the physical
-  screen. The same port may have many associated grafts for applications with
-  different units and orientations.
+  for all transformations necessary to achieve the desired effect on the
+  physical screen. The same port may have many associated grafts for
+  applications with different units and orientations.
 
-* Medium is a representation of the sheet on a physical device. Sheet is the
-  Form which is a region and may be drawn – it doesn't concern itself with
+* Medium is a representation of the sheet on a physical device. Sheet is the The
+  form which is a region and may be drawn – it doesn't concern itself with
   physical limitations. We will cover only medium's basics here.
 
 [^10]: Sometimes we deal with devices which we can't take input from – for
