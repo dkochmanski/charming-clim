@@ -136,14 +136,12 @@ and the cyan rectangle is defined by coordinates `[25,10], [30,15]`.
   of resolution size of the object is more or less the same as we specified in
   real world values.
 
-    ![Graft drawing](72dpi.png)
+  Windows Presentation Foundation declared 96PPI screen pixels
+  device-independent pixels because such displays were pretty common on
+  desktops. Our coordinates map almost perfectly to this screen. Notice the
+  approximation of right side of the violet rectangle.
 
-* Windows Presentation Foundation declared 96PPI screen pixels device-independent
-  pixels because such displays were pretty common on desktops. Our coordinates
-  map almost perfectly to this screen. Notice the approximation of right side of
-  the violet rectangle.
-  
-    ![96DPI](96dpi.png)
+    ![Lower DPI](72dpi-96dpi-sbs.png)
 
 * Fact that the screen has higher density doesn't mean that coordinates which map
   perfectly on lower density screen will map well on the higher density one. Take
