@@ -130,13 +130,13 @@ and the cyan rectangle is defined by coordinates `[25,10], [30,15]`.
 
     ![Graft drawing](mdpi.png)
 
-* Some old displays had density 72PPI. All coordinates doesn't map exactly so we
-  need to round them to the closest pixel[^3]. Note that border is thicker and
-  that proportions are a little distorted. On the other despite drastic change
-  of resolution size of the object is more or less the same as we specified in
-  real world values.
+* Some old displays have density 72PPI. All coordinates doesn't map exactly so
+  we need to round them to the closest pixel[^3]. Note that border is thicker
+  and that proportions are a little distorted. On the other despite drastic
+  change of resolution size of the object is more or less the same as we
+  specified in real world values.
 
-  Windows Presentation Foundation declared 96PPI screen pixels
+  Windows Presentation Foundation declared 96PPI screen pixels being
   device-independent pixels because such displays were pretty common on
   desktops. Our coordinates map almost perfectly to this screen. Notice the
   approximation of right side of the violet rectangle.
@@ -149,15 +149,11 @@ and the cyan rectangle is defined by coordinates `[25,10], [30,15]`.
   display they were all integers.
 
     ![HDPI](hdpi.png)
-    ![HDPI (scale x4, cyan rectangle)](hdpi-cyan.png)
-    ![HDPI (scale x4, violet rectangle corner](hdpi-violet.png)
 
 * Higher the resolution better our rectangles look like (border line is thinner,
   approximated mapping is less visible to the eye). Here is XXXHDPI:
 
     ![XXXHDPI](xxxhdpi.png)
-    ![XXXHDPI (scale x4, cyan rectangle)](xxxhdpi-cyan.png)
-
 
 * Some printers have a really high DPI, here is imaginatory 2560 DPI printer.
   Funnily enough its accuracy exceeds our approximation density so the red
@@ -165,13 +161,13 @@ and the cyan rectangle is defined by coordinates `[25,10], [30,15]`.
   if we scale the image though).
 
     ![printer](printer.png)
-    ![printer (scale x4, cyan rectangle)](printer-cyan.png)
 
 * We've been analyzing high density screens with square pixels (or dots). Let's
-  take a look at something with low density - a character terminal. To make it
-  better illustration we assume some absurd terminal which has 5x8 DP per
-  character (practial minimum to cover whole alphabet, but too small to be seen
-  by human eye). Notice, that the real size is still similar.
+  take a look at something with a really low density - a character terminal. To
+  make it better illustration we assume some absurd terminal which has 5x8 DP
+  per character (practial minimum to cover whole alphabet, but too small to be
+  seen by human eye). Notice, that the real size of the rectangles is still
+  similar.
 
     ![console](console.png)
 
@@ -205,8 +201,9 @@ we wouldn't know where to start plotting.
 There is one more unanswered question - how can we program applications with a
 specific device limitations in mind? As we have discussed earlier default sheet
 unit should be dip and default sheet orientation is the same as a physical
-sheet. Answering it requires some additional thought and it is a material for a
-separate chapter. We will focus on port and graft implementation instead.
+sheet. Providing means to change defaults requires additional thought and is a
+material for a separate chapter. We will focus now on the port and the graft
+implementation instead.
 
 <!-- Writing applications for terminal require a special kind of focus: the space is -->
 <!-- very limited and off-by-one errors yield a huge difference in visual apperance in -->
@@ -228,3 +225,7 @@ separate chapter. We will focus on port and graft implementation instead.
 <!-- http://bauhh.dyndns.org:8000/clim-spec/7-3.html -->
 <!-- move-and-resize-sheet, sheet-transformation -->
 
+
+# Port and graft protocols
+
+Now since we know *what* we want time to think about *how* to achieve it.
