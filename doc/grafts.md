@@ -189,7 +189,7 @@ we wouldn't know where to start plotting.
   what is wrong with this picture? We have defined both rectangles in default
   orientation, so our drawing should look similar disregarding the medium we
   print on. While we preserved the real size we don't preserve image orientation
-  - cyan rectangle should be higher on the plot.
+  – cyan rectangle should be higher on the plot.
 
     ![plotter](plotter-wrong-sbs.png)
 
