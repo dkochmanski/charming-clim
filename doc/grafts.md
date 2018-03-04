@@ -160,7 +160,7 @@ and the cyan rectangle is defined by coordinates `[25,10], [30,15]`.
   border which is meant to show the ideal rectangle is a little off (it's fine
   if we scale the image though).
 
-    ![printer](printer.png)
+    ![HQ Printer](printer.png)
 
 * We've been analyzing high density screens with square pixels (or dots). Let's
   take a look at something with a really low density - a character terminal. To
@@ -169,7 +169,7 @@ and the cyan rectangle is defined by coordinates `[25,10], [30,15]`.
   seen by human eye). Notice, that the real size of the rectangles is still
   similar.
 
-    ![console](console.png)
+    ![Character terminal](console.png)
 
 Now it is time to deal with graphics orientation (Y-axis grows towards top). We
 will use imaginatory plotter with 80DPI resolution to illustrate two solutions
@@ -185,7 +185,7 @@ we wouldn't know where to start plotting.
   print on. While we preserved the real size we don't preserve image orientation
   – cyan rectangle should be higher on the plot.
 
-    ![plotter](plotter-wrong-sbs.png)
+    ![Plotter (bad transformation)](plotter-wrong-sbs.png)
 
 * Correct transformation involves reverting Y axis and translating objects by
   the screen height. See correct transformation (on 80DPI and on MDPI plotter).
@@ -201,9 +201,46 @@ we wouldn't know where to start plotting.
 There is one more unanswered question - how can we program applications with a
 specific device limitations in mind? As we have discussed earlier default sheet
 unit should be dip and default sheet orientation is the same as a physical
-sheet. Providing means to change defaults requires additional thought and is a
-material for a separate chapter. We will focus now on the port and the graft
-implementation instead.
+sheet[^8].
+
+Writing an application for a terminal is different than i.e writing an
+application for web browser. Number of characters which fit on the device is
+limited, drawing buttons is practically not an option etc. To ensure that the
+application renders correctly we need a special kind of sheet which will operate
+on character-based streams. Take a look at the following example.
+
+![Sheets with different units.](sheets-different-units.png)
+
+The first sheet base unit is a character of a certain physical size. We draw
+some characters on it in various colors. Nothing prevents us from drawing a
+circle[^9] but that would miss the point. We use character units because we
+don't want rounding and approximation. Background and foreground colors are
+inherited. The second sheet base unit is dip. It has two circles, solid grey
+background and a few strings.
+
+Ideally we want to be able to render both sheets on the same physical
+device. Graft and medium will take care of approximating our sheets with
+something as close to the original as possible and render them on the same
+space. Effect could look something like this.
+
+![Different kinds of screens.](screens-different-kinds.png)
+
+The first screen is a terminal. Circles from the second sheet are approximated
+with characters and looks ugly but they reassemble the original
+application. Colors and proportions are generally preserved. On top of it we see
+our terminal-specialized sheet which looks exactly as we have defined it.
+
+On the second screen we see a pixel-based display (mDPI). Second sheet is
+rendered very nicely (looks like something we have defined). What is more
+interesting is our first sheet which was defined in character-based units. It
+looks exactly the same as on the terminal thanks to the high-density which is
+provided by our screen.
+
+[^8]: Providing means to change defaults requires additional thought and is a
+    material for a separate chapter. McCLIM doesn't allow it yet.
+
+[^9]: As we have noted sheets are ideal planar spaces where line thickness is 0
+    and there is nothing preventing us from using fractions as coordinates.
 
 <!-- Writing applications for terminal require a special kind of focus: the space is -->
 <!-- very limited and off-by-one errors yield a huge difference in visual apperance in -->
@@ -225,7 +262,25 @@ implementation instead.
 <!-- http://bauhh.dyndns.org:8000/clim-spec/7-3.html -->
 <!-- move-and-resize-sheet, sheet-transformation -->
 
-
 # Port and graft protocols
 
-Now since we know *what* we want time to think about *how* to achieve it.
+Now since we know *what* we want time to think about *how* to achieve it. Let me
+remind you what kind of objects are we dealing with:
+
+* Port is a logical connection to the display server. In practice it may contain
+  a foreign handler which is passed to the external system API. It is
+  responsible for the communication – configuring, writing to[^10] and reading from
+  the device we are connected to.
+
+* Graft is a logical screen representation on which we are drawing. It is
+  responsible for all transformations necessary to achieve desired effect on the
+  physical screen. The same port may have many grafts so applications with
+  different units and orientation may be displayed on the same screen
+  simultaneously.
+
+* Medium is a representation of the sheet on a physical device. Sheet is an
+  ideal object which occupies some region and may be drawn – it doesn't concern
+  itself with physical limitations. We will cover only medium basics here.
+
+[^10]: Sometimes we deal with devices which we can't take input from – for
+    instance a printer, a PDF render or a display without other peripherals.
