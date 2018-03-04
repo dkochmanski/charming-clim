@@ -261,10 +261,18 @@
 (defun draw-on-console (sheet)
   (with-translation (sheet 40 40)
     (with-scaling (sheet 10)
-      (flet ((draw-cell (x y &key ch (fc +white+) (bc +black+))
+      (flet ((draw-cell (x y &key show-grid ch (fc +white+) (bc +black+))
                (setf x (* x 5/2) y (* y 8/2))
                (draw-rectangle* sheet x y (+ x 5/2) (+ y 8/2) :ink bc)
-                                        ;(draw-rectangle* sheet x y (+ x 5/2) (+ y 8/2) :ink +gray+ :filled nil)
+               (when show-grid
+                 (with-scaling (sheet 1/10)
+                   (draw-rectangle* sheet
+                                    (+ (* 10 x) 2)
+                                    (+ (* 10 y) 2)
+                                    (- (* 10 (+ x 5/2)) 2)
+                                    (- (* 10 (+ y 8/2)) 2)
+                                    :ink +gray22+
+                                    :filled nil)))
                (when ch
                  (draw-text* sheet ch x y
                              :align-x :left
@@ -274,7 +282,7 @@
                              :text-family :fixed))))
         (dotimes (x 16)
           (dotimes (y 10)
-            (draw-cell x y)))
+            (draw-cell x y :show-grid t)))
         (draw-coords sheet "char" "1cm")
         (let ((y 1))
           (loop for x from 1 to 3 do (draw-cell x y :bc +grey42+))

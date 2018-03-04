@@ -230,11 +230,11 @@ with characters and looks ugly but they reassemble the original
 application. Colors and proportions are generally preserved. On top of it we see
 our terminal-specialized sheet which looks exactly as we have defined it.
 
-On the second screen we see a pixel-based display (mDPI). Second sheet is
-rendered very nicely (looks like something we have defined). What is more
-interesting is our first sheet which was defined in character-based units. It
-looks exactly the same as on the terminal thanks to the high-density which is
-provided by our screen.
+The second screen is pixel-based display (mDPI). Second sheet is rendered very
+nicely (looks like something we have defined). What is more interesting is our
+first sheet which was defined in character-based units. It looks exactly the
+same as on the terminal thanks to the high-density which is provided by our
+screen.
 
 [^8]: Providing means to change defaults requires additional thought and is a
     material for a separate chapter. McCLIM doesn't allow it yet.
