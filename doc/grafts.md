@@ -265,8 +265,8 @@ remind you what kind of objects we are dealing with:
   physical screen. The same port may have many associated grafts for
   applications with different units and orientations.
 
-* Medium is a representation of the sheet on a physical device. Sheet is the The
-  form which is a region and may be drawn – it doesn't concern itself with
+* Medium is a representation of the sheet on a physical device. Sheet is the
+  Form which is a region and may be drawn – it doesn't concern itself with
   physical limitations.
 
 In the next post I will show how to implement the port and the graft (and a bit
