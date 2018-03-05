@@ -257,7 +257,7 @@ remind you what kind of objects we are dealing with:
 
 * Port is a logical connection to a display server. For instance, it may contain
   a foreign handler which is passed to the external system API. It is
-  responsible for the communication – configuring, writing to[^10] and reading
+  responsible for the communication – configuring, writing to and reading[^10]
   from a device, we are connected to.
 
 * Graft is a logical screen representation on which we draw. It is responsible
