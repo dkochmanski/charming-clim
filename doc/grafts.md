@@ -33,8 +33,8 @@ to take into consideration at least the following scenarios:
 
 1. If we assume device-specific unit results may drastically differ (density may
 vary from say 1200dpi on a printer down to 160dpi on a desktop[^4]!. The very
-same square could have 20cm on a paper sheet, 10cm and 7cm on different displays
-and 1cm on a terminal.  From the perspective of a person who uses the
+same square could have 1cm on a paper sheet, 7cm and 10cm on different displays
+and 200cm on a terminal.  From the perspective of a person who uses the
 application, this may be confusing because physical objects don't change size
 without a reason.
 
