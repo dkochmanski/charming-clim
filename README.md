@@ -108,7 +108,7 @@ We want borders around the window. CFFI interface is a bit ugly (i.e we would
 have to extract a window pointer to call `wborder` on it). We are going to
 abstract this with a function which plays nice with the lispy abstraction.
 
-```
+```common-lisp
 (defun draw-window-border (window
                            &optional
                              (ls #\|) (rs #\|) (ts #\-) (bs #\-)
@@ -323,7 +323,7 @@ Time to refactor input and output functions: `display-amazing-hello-world` and
 
 And finally improved application which takes asynchronous input without blocking.
 
-```
+```common-lisp
 (defun improved-amazing-hello-world ()
   (charms:with-curses ()
     (charms:disable-echoing)
@@ -631,7 +631,7 @@ and y coordinate. Each gadget occupies some space on the screen (lets call it a
 region) which may be characterized by its bounding rectangle with [min-x, min-y]
 and [max-x, max-y] points.
 
-```
+```common-lisp
 (defgeneric bounding-rectangle (gadget)
   (:method ((gadget text-input-gadget))
     (destructuring-bind (x . y) (gadget-position gadget)
@@ -792,7 +792,7 @@ To make terminal report mouse events in the intelligible way we need to call
 function `charms:enable-extra-keys` (thanks to that we don't deal with raw
 character sequences). We also call `start-mouse`.
 
-```
+```common-lisp
 (defun enterprise-hello-world ()
   (charms:with-curses ()
     (charms:disable-echoing)
