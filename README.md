@@ -519,7 +519,7 @@ cursor will be at the end of the computation string).
 handles input differently. For `Quit` we reserve `C-q` instead of `q` because we
 want to be able to type this character in the input box. We also add `C-r`
 sequence to refresh whole screen (just in case if we resize the terminal and
-some glitches remain). `:compute` is handledthe same way as it was
+some glitches remain). `:compute` is handled the same way as it was
 previously. Finally if input is something else we feed it to the
 `*active-gadget*`. If `handle-input` returns something else than NIL we
 redisplay the application.
@@ -551,6 +551,9 @@ We want more gadgets. For now we will settle with buttons.
 
 (defun make-button-gadget (text callback x y)
   (make-instance 'button-gadget :label text :action callback :position (cons x y)))
+
+(define-color-pair (+yellow/black+ 3) +yellow+ +black+)
+(define-color-pair (+red/black+ 4) +red+ +black+)
 
 (defmethod display-gadget ((window charms:window) (gadget button-gadget) &key)
   (with-colors (window (if (eql gadget *active-gadget*)
