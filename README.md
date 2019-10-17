@@ -552,8 +552,8 @@ We want more gadgets. For now we will settle with buttons.
 (defun make-button-gadget (text callback x y)
   (make-instance 'button-gadget :label text :action callback :position (cons x y)))
 
-(define-color-pair (+yellow/black+ 3) +yellow+ +black+)
-(define-color-pair (+red/black+ 4) +red+ +black+)
+(define-color-pair (+yellow/black+ 5) +yellow+ +black+)
+(define-color-pair (+red/black+ 6) +red+ +black+)
 
 (defmethod display-gadget ((window charms:window) (gadget button-gadget) &key)
   (with-colors (window (if (eql gadget *active-gadget*)
